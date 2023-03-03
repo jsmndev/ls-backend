@@ -1,26 +1,34 @@
-# Find the thousands, hundreds, tens and ones place of this
-# 4-digit number:
-num = 4936
+# Use the modulo operator, division, or a combination of both to take
+# a 4 digit number and find the digit in the: 1) thousands place
+# 2) hundreds place 3) tens place 4) ones place
 
-puts num
+number = 4936
 
-puts "thousands place: #{num / 1000}"
-# num / 1000 results to integer 4 without the remainder 936
+thousands = number / 1000
+# => 4. ez
 
-puts "hundreds place: #{num % 1000 / 100}"
-# using %, we get the remainder of num / 1000:
-# num % 1000 = 936
-#
-# and now we can divide by 100 to get the hundreds place:
-# 936 / 100 = 9
+# remember that the modulo operator returns the remainder
+hundreds = number % 1000
+# => 936
+# we can now divide 936 by 100 to get 9
+hundreds = hundreds / 100
+# => 9
 
-puts "tens place: #{num % 100 / 10}"
-# num / 100 results to 49 without the remainder of 36
-# using %, we get the remainder of num / 100:
-# num % 100 = 36
-# 36 / 10 = 3
+# Repeat ze pattern for the rest
+tens = number % 1000 % 100 / 10
+# => 3
 
-puts "ones place: #{num % 10}"
-# num / 10 results to 0 without the remainder of 6
-# using %, we get the remainder of num / 10:
-# num % 10 = 6
+ones = number % 1000 % 100 % 10
+# => 6
+
+### Simplification
+
+# for the tens place, 4936 / 100 = 49 with a remainder of 36
+# therefore we can simply get rid of '% 1000' and just do
+tens = number % 100 / 10
+
+# for the ones place, 4936 / 10 = 493 with a remainder of 6
+# therefore we can simply get the ones place by doing 4936 % 10
+
+ones = number % 10
+# => 6

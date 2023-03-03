@@ -1,7 +1,6 @@
-puts 9.5**2
-puts 3.7**2
-puts 21.3**2
+# Write a program that calculates the squares of 3 float numbers
+# of your choosing and outputs the result to the screen.
 
-puts 9.5 * 9.5
-puts 3.7 * 3.7
-puts 21.3 * 21.3
+puts 3.14 * 3.14
+puts 75.34 * 75.34
+puts 905.6 * 905.6

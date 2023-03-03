@@ -1,8 +1,6 @@
-name = "Jaja"
-
-def call_name
-  name = 1
+y = 0
+3.times do
+  y += 1
+  x = 1
 end
-
-call_name()
-puts name
+puts x
