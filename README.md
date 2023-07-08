@@ -1,2 +1,2 @@
 # ls-backend
-Launch School backend course
+Launch School backend course exercises
