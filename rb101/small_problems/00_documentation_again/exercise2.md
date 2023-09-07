@@ -17,5 +17,9 @@ Looking at the documentation, it said that it is the same as `Date.new`, and
 
 The 4 `puts` statements will print the following:
 
-```ruby
+```
+-4712-01-01
+2016-01-01
+2016-05-01
+2016-05-13
 ```
