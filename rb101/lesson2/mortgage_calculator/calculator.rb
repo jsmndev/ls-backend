@@ -4,26 +4,26 @@ def prompt(message)
   puts "=> #{message}"
 end
 
-# this function builds out a user input and takes in
-# a hash with the following fields:
-#  - :prompt (String) - prompt the input's message
-#  - :err_msg (String) - prompt an error message
-#  - :validate_by (Symbol) - what kind of number input to validate.
-#       it accepts :by_integer or :by_float
-def get_input(attrs)
+def get_input(prompt, err_msg, validation = :by_integer)
   loop do
-    prompt(attrs[:prompt])
+    prompt(prompt)
     input = gets.chomp
 
-    case attrs[:validate_by]
-    when :by_integer
-      return input if !input.empty? && input.to_i > 0
-
-    when :by_float
-      return input if !input.empty? && input.to_f > 0
+    if valid_number?(input, validation)
+      return input
+    else
+      prompt(err_msg)
     end
+  end
+end
 
-    prompt(attrs[:err_msg])
+def valid_number?(input, validation)
+  case validation
+  when :by_integer
+    !input.empty? && input.to_i > 0
+
+  when :by_float
+    !input.empty? && input.to_f > 0
   end
 end
 
@@ -65,47 +65,36 @@ prompt("Welcome to Mortgage Calculator!")
 
 loop do
   loan_amount = get_input(
-    {
-      prompt: "Enter loan amount:",
-      err_msg: "Enter a valid amount",
-      validate_by: :by_float
-    }
-  ).to_i
+    "Enter loan amount:",
+    "Enter a valid amount",
+    :by_float
+  ).to_f
 
   apr = get_input(
-    {
-      prompt: "Enter APR (%):",
-      err_msg: "Enter a valid rate",
-      validate_by: :by_float
-    }
+    "Enter APR (%):",
+    "Enter a valid rate",
+    :by_float
   ).to_f
 
   loan_term = get_input(
-    {
-      prompt: "Enter loan term (in months):",
-      err_msg: "Enter a valid term",
-      validate_by: :by_integer
-    }
+    "Enter loan term (in months):",
+    "Enter a valid term"
   ).to_i
 
   #
   # Calculations
   #
 
-  # Get monthly interest rate
   interest_rate = get_interest_rate(apr)
 
-  # Calculate monthly payment
   monthly_payment = calculate_monthly_payment(
     loan_amount,
     interest_rate,
     loan_term
   )
 
-  # Calculate total payments
   total_payments = monthly_payment * loan_term
 
-  # Calculate total interest
   total_interest = calculate_total_interest(
     loan_amount,
     interest_rate,
